@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "RGO",
+			"Path": "..\\Source\\RGO.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "RGOEditor",
+			"Path": "..\\Source\\RGOEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
