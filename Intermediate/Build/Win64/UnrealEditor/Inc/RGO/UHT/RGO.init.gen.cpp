@@ -17,7 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeRGO_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0xE3726A24,
+				0x1A99E53A,
 				0x53F52028,
 				METADATA_PARAMS(0, nullptr)
 			};
@@ -25,5 +25,5 @@ void EmptyLinkFunctionForGeneratedCodeRGO_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_RGO.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_RGO(Z_Construct_UPackage__Script_RGO, TEXT("/Script/RGO"), Z_Registration_Info_UPackage__Script_RGO, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xE3726A24, 0x53F52028));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_RGO(Z_Construct_UPackage__Script_RGO, TEXT("/Script/RGO"), Z_Registration_Info_UPackage__Script_RGO, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x1A99E53A, 0x53F52028));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

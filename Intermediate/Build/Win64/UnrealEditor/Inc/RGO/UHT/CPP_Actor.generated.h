@@ -17,6 +17,10 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Class ACPP_Actor ***************************************************************
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CPP_Actor_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSinMovement);
+
+
 RGO_API UClass* Z_Construct_UClass_ACPP_Actor_NoRegister();
 
 #define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CPP_Actor_h_12_INCLASS_NO_PURE_DECLS \
@@ -44,6 +48,7 @@ public: \
 #define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CPP_Actor_h_12_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CPP_Actor_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
 	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CPP_Actor_h_12_INCLASS_NO_PURE_DECLS \
 	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CPP_Actor_h_12_ENHANCED_CONSTRUCTORS \
 private: \

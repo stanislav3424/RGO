@@ -29,4 +29,17 @@ public:
 
 private:
     void ShowActorInformation() const;
+
+public:
+    UFUNCTION(BlueprintCallable, Category = "SinMovement")
+    void SinMovement();
+
+    UPROPERTY(EditInstanceOnly, Category = "SinMovement")
+    float Amplitude = 50.0f;
+
+    UPROPERTY(EditInstanceOnly, Category = "SinMovement")
+    float Frequency = 2.0f;
+
+private:
+    FVector InitialLocation;
 };
