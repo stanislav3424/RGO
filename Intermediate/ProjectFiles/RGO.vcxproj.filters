@@ -11,6 +11,9 @@
     <None Include="..\..\Source\RGOEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.clang-format" />
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
     <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
@@ -36,6 +39,15 @@
     <ClInclude Include="..\..\Source\RGO\CPP_Actor.h">
       <Filter>Source\RGO</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\RGO\Macros.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\PC_Main.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\PC_Main.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
     <None Include="..\..\Source\RGO\RGO.Build.cs">
       <Filter>Source\RGO</Filter>
     </None>
@@ -49,6 +61,12 @@
       <Filter>Source\RGO</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\RGO\RGOGameModeBase.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\ThirdPersonCharacter.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\ThirdPersonCharacter.h">
       <Filter>Source\RGO</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,34 +1,34 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "ThirdPersonCharacter.h"
+#include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
-// Sets default values
 AThirdPersonCharacter::AThirdPersonCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bCanEverTick = true;
 
+    SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+    SpringArmComponent->SetupAttachment(RootComponent);
+
+    SpringArmComponent->SetUsingAbsoluteRotation(true);
+
+    SpringArmComponent->TargetArmLength = 1500.0f;
+    SpringArmComponent->bDoCollisionTest = false;
+    SpringArmComponent->bEnableCameraRotationLag = true;
+    SpringArmComponent->CameraRotationLagSpeed = 10.0f;
+    SpringArmComponent->SetRelativeRotation(FRotator(-60.f, 0.f, 0.f));
+
+    CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+    CameraComponent->SetupAttachment(SpringArmComponent, USpringArmComponent::SocketName);
+    CameraComponent->bUsePawnControlRotation = false;
+
+    bUseControllerRotationPitch = false;
+    bUseControllerRotationYaw = false;
+    bUseControllerRotationRoll = false;
 }
 
-// Called when the game starts or when spawned
-void AThirdPersonCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
 
-// Called every frame
-void AThirdPersonCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
+void AThirdPersonCharacter::BeginPlay() { Super::BeginPlay(); }
 
-}
-
-// Called to bind functionality to input
-void AThirdPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
+void AThirdPersonCharacter::Tick(float DeltaTime) { Super::Tick(DeltaTime); }
