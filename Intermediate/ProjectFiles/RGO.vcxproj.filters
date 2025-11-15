@@ -33,10 +33,40 @@
     <Filter Include="Source\RGO">
       <UniqueIdentifier>{7D8E12D2-23A3-3F70-8126-0D639BC17DFD}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\RGO\CharacterLogic.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\CharacterLogic.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\RGO\CPP_Actor.cpp">
       <Filter>Source\RGO</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\RGO\CPP_Actor.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\FunctionLibrary.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\FunctionLibrary.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\GameInstance_Main.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\GameInstance_Main.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\ItemLogic.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\ItemLogic.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\ItemLogicInterface.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\ItemLogicInterface.h">
       <Filter>Source\RGO</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\RGO\Macros.h">
@@ -67,6 +97,18 @@
       <Filter>Source\RGO</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\RGO\ThirdPersonCharacter.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\WeaponActor.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\WeaponActor.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\WeaponLogic.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\WeaponLogic.h">
       <Filter>Source\RGO</Filter>
     </ClInclude>
   </ItemGroup>

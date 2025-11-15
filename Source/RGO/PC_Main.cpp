@@ -9,6 +9,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "ThirdPersonCharacter.h"
+#include "CharacterLogic.h"
+#include "GameInstance_Main.h"
 #include "Macros.h"
 
 void APC_Main::BeginPlay()
@@ -21,25 +23,27 @@ void APC_Main::BeginPlay()
     if (IsValid(ControlledPawn))
     {
         SpringArmComponentRef = ControlledPawn->GetSpringArmComponent();
-        MovementComponent = ControlledPawn->GetCharacterMovement();
+        MovementComponentRef = ControlledPawn->GetCharacterMovement();
+
+        if (ControlledPawn->Implements<UItemLogicInterface>())
+        {
+            auto ItemLogic = IItemLogicInterface::Execute_GetItemLogic(ControlledPawn);
+            CharacterLogicRef = Cast<UCharacterLogic>(ItemLogic);
+        }
     }
+
+    AddMappingContext();
+
+    RunTest(); //затычка
 
     CHECK_FIELD(ControlledPawn);
     CHECK_FIELD(SpringArmComponentRef);
-    CHECK_FIELD(MovementComponent);
+    CHECK_FIELD(MovementComponentRef);
+    CHECK_FIELD(CharacterLogicRef);
     CHECK_FIELD(InputMappingContext);
     CHECK_FIELD(MoveInputAction);
     CHECK_FIELD(RotateInputAction);
     CHECK_FIELD(ZoomInputAction);
-
-    AddMappingContext();
-}
-
-void APC_Main::AddMappingContext()
-{
-    if (auto EnhancedInputLocalPlayerSubsystem =
-            ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
-        EnhancedInputLocalPlayerSubsystem->AddMappingContext(InputMappingContext, 0);
 }
 
 void APC_Main::SetupInputComponent()
@@ -53,6 +57,9 @@ void APC_Main::SetupInputComponent()
         EnhancedInputComponent->BindAction(ZoomInputAction, ETriggerEvent::Triggered, this, &APC_Main::Zoom);
         EnhancedInputComponent->BindAction(RunInputAction, ETriggerEvent::Started, this, &APC_Main::RunStart);
         EnhancedInputComponent->BindAction(RunInputAction, ETriggerEvent::Completed, this, &APC_Main::RunEnd);
+        EnhancedInputComponent->BindAction(ShootInputAction, ETriggerEvent::Started, this, &APC_Main::ShootStart);
+        EnhancedInputComponent->BindAction(ShootInputAction, ETriggerEvent::Completed, this, &APC_Main::ShootEnd);
+        EnhancedInputComponent->BindAction(ReloadInputAction, ETriggerEvent::Started, this, &APC_Main::Reload);
     }
 }
 
@@ -62,9 +69,35 @@ void APC_Main::Tick(float DeltaTime)
 
     TurnPawnToCursor();
     SetArmLength(DeltaTime);
-    UpdateStamina(DeltaTime);
-    UpdateMovementState();
-    UpdatePawnMaxSpeed();
+}
+
+void APC_Main::RunTest()
+{
+    if (IsValid(ControlledPawn) && ControlledPawn->Implements<UItemLogicInterface>())
+    {
+        ControlledPawn->AutomaticActivation();
+
+        if (auto GameInstance = GetGameInstance<UGameInstance_Main>())
+        {
+            auto WeaponLogic = GameInstance->CreateItemLogic(TEXT("Test_2"));
+
+            auto CharacterLogic    = IItemLogicInterface::Execute_GetItemLogic(ControlledPawn);
+            CharacterLogicRef = Cast<UCharacterLogic>(CharacterLogic);
+
+            CHECK_FIELD(WeaponLogic);
+            CHECK_FIELD(CharacterLogic);
+
+            if (CharacterLogicRef)
+                CharacterLogicRef->EquipItem(WeaponLogic);
+        }
+    }
+}
+
+void APC_Main::AddMappingContext()
+{
+    if (auto EnhancedInputLocalPlayerSubsystem =
+            ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+        EnhancedInputLocalPlayerSubsystem->AddMappingContext(InputMappingContext, 0);
 }
 
 void APC_Main::SetArmLength(float DeltaTime)
@@ -115,7 +148,7 @@ void APC_Main::Move(const FInputActionValue& Value)
 
 void APC_Main::Rotate(const FInputActionValue& Value)
 {
-    if (!IsValid(SpringArmComponentRef))
+    if (!SpringArmComponentRef)
         return;
 
     float RotationValue = Value.Get<float>();
@@ -131,7 +164,7 @@ void APC_Main::Rotate(const FInputActionValue& Value)
 
 void APC_Main::Zoom(const FInputActionValue& Value)
 {
-    if (!IsValid(SpringArmComponentRef))
+    if (!SpringArmComponentRef)
         return;
 
     float ZoomValue = Value.Get<float>();
@@ -142,64 +175,34 @@ void APC_Main::Zoom(const FInputActionValue& Value)
     DesiredArmLength = FMath::Clamp(DesiredArmLength - Delta, MinZoomDistance, MaxZoomDistance);
 }
 
-void APC_Main::RunStart(const FInputActionValue& Value) { HandleRunInput(true); }
-
-void APC_Main::RunEnd(const FInputActionValue& Value) { HandleRunInput(false); }
-
-void APC_Main::HandleRunInput(bool bWantsToRun)
+void APC_Main::RunStart(const FInputActionValue& Value)
 {
-    if (bWantsToRun && CurrentStamina >= MinStaminaToRun)
-        bIsRunInput = true;
-    else if (!bWantsToRun)
-        bIsRunInput = false;
+    if (CharacterLogicRef)
+        CharacterLogicRef->HandleRunInput(true);
 }
 
-void APC_Main::UpdateStamina(float DeltaTime)
+void APC_Main::RunEnd(const FInputActionValue& Value)
 {
-    if (MovementState == EMovementState::Run && bIsMove)
-    {
-        CurrentStamina = FMath::Max(0.0f, CurrentStamina - StaminaDrainRate * DeltaTime);
-
-        if (CurrentStamina <= 0.0f)
-            bIsRunInput = false;
-    }
-    else
-    {
-        CurrentStamina = FMath::Min(MaxStamina, CurrentStamina + StaminaRegenRate * DeltaTime);
-    }
+    if (CharacterLogicRef)
+        CharacterLogicRef->HandleRunInput(false);
 }
 
-void APC_Main::UpdateMovementState()
+void APC_Main::ShootStart(const FInputActionValue& Value)
 {
-    if (!IsValid(ControlledPawn))
-        return;
 
-    FVector CurrentVelocity = ControlledPawn->GetVelocity();
-    float Speed = CurrentVelocity.Size();
-
-    const float MinMovementThreshold = 1.0f;
-
-    bIsMove = Speed > MinMovementThreshold;
-
-    if (!bIsMove)
-        MovementState = EMovementState::Idle;
-    else if (bIsRunInput && bIsMove)
-        MovementState = EMovementState::Run;
-    else
-        MovementState = EMovementState::Walk;
+    if (CharacterLogicRef)
+        CharacterLogicRef->CommandShootStarted();
 }
 
-void APC_Main::UpdatePawnMaxSpeed()
+void APC_Main::ShootEnd(const FInputActionValue& Value)
 {
-    if (!IsValid(ControlledPawn))
-        return;
-    if (!IsValid(MovementComponent))
-        return;
-
-    float NewMaxSpeed = 300.0f;
-
-    if (MovementState == EMovementState::Run)
-        NewMaxSpeed = 600.0f;
-
-    MovementComponent->MaxWalkSpeed = NewMaxSpeed;
+    if (CharacterLogicRef)
+        CharacterLogicRef->CommandShootCompleted();
 }
+
+void APC_Main::Reload(const FInputActionValue& Value)
+{
+    if (CharacterLogicRef)
+        CharacterLogicRef->CommandReloadWeapon();
+}
+

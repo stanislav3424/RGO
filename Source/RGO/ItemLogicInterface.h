@@ -6,7 +6,8 @@
 #include "UObject/Interface.h"
 #include "ItemLogicInterface.generated.h"
 
-// This class does not need to be modified.
+class UItemLogic;
+
 UINTERFACE(MinimalAPI)
 class UItemLogicInterface : public UInterface
 {
@@ -20,6 +21,10 @@ class RGO_API IItemLogicInterface
 {
 	GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ItemLogic")
+    UItemLogic* GetItemLogic();
+
+    UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "ItemLogic")
+    void SetItemLogic(UItemLogic* NewItemLogic);
 };

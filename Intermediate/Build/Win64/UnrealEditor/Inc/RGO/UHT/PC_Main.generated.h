@@ -16,16 +16,10 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
-enum class EMovementState : uint8;
-
 // ********** Begin Class APC_Main *****************************************************************
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_32_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execGetMovementState);
-
-
 RGO_API UClass* Z_Construct_UClass_APC_Main_NoRegister();
 
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_32_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_27_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAPC_Main(); \
 	friend struct Z_Construct_UClass_APC_Main_Statics; \
@@ -36,7 +30,7 @@ public: \
 	DECLARE_SERIALIZER(APC_Main)
 
 
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_32_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_27_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API APC_Main(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	/** Deleted move- and copy-constructors, should never be used */ \
@@ -48,13 +42,12 @@ public: \
 	NO_API virtual ~APC_Main();
 
 
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_29_PROLOG
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_32_GENERATED_BODY \
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_24_PROLOG
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_27_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_32_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_32_INCLASS_NO_PURE_DECLS \
-	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_32_ENHANCED_CONSTRUCTORS \
+	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_27_INCLASS_NO_PURE_DECLS \
+	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h_27_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -65,16 +58,5 @@ class APC_Main;
 
 #undef CURRENT_FILE_ID
 #define CURRENT_FILE_ID FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h
-
-// ********** Begin Enum EMovementState ************************************************************
-#define FOREACH_ENUM_EMOVEMENTSTATE(op) \
-	op(EMovementState::Idle) \
-	op(EMovementState::Walk) \
-	op(EMovementState::Run) 
-
-enum class EMovementState : uint8;
-template<> struct TIsUEnumClass<EMovementState> { enum { Value = true }; };
-template<> RGO_API UEnum* StaticEnum<EMovementState>();
-// ********** End Enum EMovementState **************************************************************
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

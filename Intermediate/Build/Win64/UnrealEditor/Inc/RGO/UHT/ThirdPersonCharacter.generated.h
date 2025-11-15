@@ -17,9 +17,13 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Class AThirdPersonCharacter ****************************************************
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execAutomaticActivation);
+
+
 RGO_API UClass* Z_Construct_UClass_AThirdPersonCharacter_NoRegister();
 
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_17_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAThirdPersonCharacter(); \
 	friend struct Z_Construct_UClass_AThirdPersonCharacter_Statics; \
@@ -27,10 +31,11 @@ private: \
 	friend RGO_API UClass* Z_Construct_UClass_AThirdPersonCharacter_NoRegister(); \
 public: \
 	DECLARE_CLASS2(AThirdPersonCharacter, ACharacter, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/RGO"), Z_Construct_UClass_AThirdPersonCharacter_NoRegister) \
-	DECLARE_SERIALIZER(AThirdPersonCharacter)
+	DECLARE_SERIALIZER(AThirdPersonCharacter) \
+	virtual UObject* _getUObject() const override { return const_cast<AThirdPersonCharacter*>(this); }
 
 
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_17_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	AThirdPersonCharacter(AThirdPersonCharacter&&) = delete; \
 	AThirdPersonCharacter(const AThirdPersonCharacter&) = delete; \
@@ -40,12 +45,13 @@ public: \
 	NO_API virtual ~AThirdPersonCharacter();
 
 
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_12_PROLOG
-#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_15_GENERATED_BODY \
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_14_PROLOG
+#define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_17_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_15_INCLASS_NO_PURE_DECLS \
-	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_17_INCLASS_NO_PURE_DECLS \
+	FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_ThirdPersonCharacter_h_17_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

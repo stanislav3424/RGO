@@ -11,16 +11,11 @@ class UInputAction;
 class AThirdPersonCharacter;
 class USpringArmComponent;
 class UCharacterMovementComponent;
+class UCharacterLogic;
 
 struct FInputActionValue;
 
-UENUM(BlueprintType)
-enum class EMovementState : uint8
-{
-    Idle UMETA(DisplayName = "Idle"),
-    Walk UMETA(DisplayName = "Walk"),
-    Run UMETA(DisplayName = "Run"),
-};
+
 
 
 /**
@@ -38,6 +33,8 @@ protected:
 public:
     virtual void Tick(float DeltaTime) override;
 
+    void RunTest();
+
 
 private:
     void AddMappingContext();
@@ -49,7 +46,8 @@ private:
 private:
     AThirdPersonCharacter* ControlledPawn;
     USpringArmComponent* SpringArmComponentRef;
-    UCharacterMovementComponent* MovementComponent;
+    UCharacterMovementComponent* MovementComponentRef;
+    UCharacterLogic* CharacterLogicRef;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
     UInputMappingContext* InputMappingContext;
@@ -65,6 +63,12 @@ private:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
     UInputAction* RunInputAction;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+    UInputAction* ShootInputAction;
+
+     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input", meta = (AllowPrivateAccess = "true"))
+    UInputAction* ReloadInputAction;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera Settings", meta = (AllowPrivateAccess = "true"))
     float MoveSpeed = 1000.0f;
@@ -91,34 +95,9 @@ private:
     void Zoom(const FInputActionValue& Value);
     void RunStart(const FInputActionValue& Value);
     void RunEnd(const FInputActionValue& Value);
+    void ShootStart(const FInputActionValue& Value);
+    void ShootEnd(const FInputActionValue& Value);
+    void Reload(const FInputActionValue& Value);
 
-private:
-    bool bIsRunInput = false;
-    bool bIsMove = false;
-    EMovementState MovementState = EMovementState::Idle;
 
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stamina", meta = (AllowPrivateAccess = "true"))
-    float MaxStamina = 100.0f;
-
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stamina", meta = (AllowPrivateAccess = "true"))
-    float CurrentStamina = 100.0f;
-
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stamina", meta = (AllowPrivateAccess = "true"))
-    float StaminaDrainRate = 30.0f;
-
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stamina", meta = (AllowPrivateAccess = "true"))
-    float StaminaRegenRate = 5.0f;
-
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Stamina", meta = (AllowPrivateAccess = "true"))
-    float MinStaminaToRun = 25.0f;
-
-    void HandleRunInput(bool bWantsToRun);
-    void UpdateStamina(float DeltaTime);
-
-    void UpdateMovementState();
-    void UpdatePawnMaxSpeed();
-
-public:
-    UFUNCTION(BlueprintCallable, Category = "MovementState")
-    EMovementState GetMovementState() const { return MovementState; };
 };

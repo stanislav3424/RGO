@@ -1,9 +1,37 @@
+---
 BasedOnStyle: Microsoft
 IndentWidth: 4
-PointerAlignment: Left
+TabWidth: 4
+UseTab: Never
 AccessModifierOffset: -4
-AllowShortFunctionsOnASingleLine: All
-
-# Template formatting
-AlwaysBreakTemplateDeclarations: Yes
-BreakTemplateDeclarations: Yes
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AlignConsecutiveDeclarations:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+BreakBeforeBraces: Allman
+ColumnLimit: 120
+ConstructorInitializerIndentWidth: 4
+Cpp11BracedListStyle: false
+DerivePointerAlignment: false
+PointerAlignment: Left
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
+NamespaceIndentation: All
+SortIncludes: false
+SpaceAfterCStyleCast: true
+SpaceBeforeParens: ControlStatements
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
