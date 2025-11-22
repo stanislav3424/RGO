@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\RGO.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\RGO.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\RGOEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.clang-format" />
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\RGO">
+      <UniqueIdentifier>{7D8E12D2-23A3-3F70-8126-0D639BC17DFD}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\RGO\CharacterLogic.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\CharacterLogic.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\CPP_Actor.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\CPP_Actor.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\FunctionLibrary.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\FunctionLibrary.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\GameInstance_Main.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\GameInstance_Main.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\GM_Main.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\GM_Main.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\HUD_Main.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\HUD_Main.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\ItemLogic.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\ItemLogic.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\ItemLogicInterface.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\ItemLogicInterface.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\RGO\Macros.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\PC_Main.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\PC_Main.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\RGO\RGO.Build.cs">
+      <Filter>Source\RGO</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\RGO\RGO.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\RGO.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\RGOGameModeBase.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\RGOGameModeBase.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\ThirdPersonCharacter.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\ThirdPersonCharacter.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\UW_HUD.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\UW_HUD.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\UW_Menu.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\UW_Menu.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\UW_Pause.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\UW_Pause.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\WeaponActor.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\WeaponActor.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\WeaponLogic.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\WeaponLogic.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
