@@ -38,6 +38,8 @@ RGO_API void FOnEquipmentChanged_DelegateWrapper(const FMulticastScriptDelegate&
 
 // ********** Begin Class UCharacterLogic **********************************************************
 #define FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CharacterLogic_h_34_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execGetTeam); \
+	DECLARE_FUNCTION(execSetTeam); \
 	DECLARE_FUNCTION(execGetItemInSlot); \
 	DECLARE_FUNCTION(execTakeOffItem); \
 	DECLARE_FUNCTION(execEquipItem); \
@@ -46,6 +48,7 @@ RGO_API void FOnEquipmentChanged_DelegateWrapper(const FMulticastScriptDelegate&
 	DECLARE_FUNCTION(execHandleRunInput); \
 	DECLARE_FUNCTION(execGetMaxStamina); \
 	DECLARE_FUNCTION(execGetCurrentStamina); \
+	DECLARE_FUNCTION(execCommandTurnTarget); \
 	DECLARE_FUNCTION(execCommandReloadWeapon); \
 	DECLARE_FUNCTION(execCommandShootCompleted); \
 	DECLARE_FUNCTION(execCommandShootStarted);

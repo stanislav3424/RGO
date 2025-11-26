@@ -119,20 +119,24 @@ struct Z_Construct_UClass_APC_Main_Statics
 		{ "ModuleRelativePath", "PC_Main.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ControlledPawn_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
 		{ "Category", "PC_Main" },
 		{ "ModuleRelativePath", "PC_Main.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SpringArmComponentRef_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
 		{ "Category", "PC_Main" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "PC_Main.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MovementComponentRef_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
 		{ "Category", "PC_Main" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "PC_Main.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CharacterLogicRef_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
 		{ "Category", "PC_Main" },
 		{ "ModuleRelativePath", "PC_Main.h" },
 	};
@@ -244,10 +248,10 @@ struct Z_Construct_UClass_APC_Main_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_ControlledPawn = { "ControlledPawn", nullptr, (EPropertyFlags)0x0040000000020801, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, ControlledPawn), Z_Construct_UClass_AThirdPersonCharacter_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ControlledPawn_MetaData), NewProp_ControlledPawn_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_SpringArmComponentRef = { "SpringArmComponentRef", nullptr, (EPropertyFlags)0x00400000000a0809, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, SpringArmComponentRef), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpringArmComponentRef_MetaData), NewProp_SpringArmComponentRef_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_MovementComponentRef = { "MovementComponentRef", nullptr, (EPropertyFlags)0x00400000000a0809, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, MovementComponentRef), Z_Construct_UClass_UCharacterMovementComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MovementComponentRef_MetaData), NewProp_MovementComponentRef_MetaData) };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_CharacterLogicRef = { "CharacterLogicRef", nullptr, (EPropertyFlags)0x0040000000020801, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, CharacterLogicRef), Z_Construct_UClass_UCharacterLogic_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterLogicRef_MetaData), NewProp_CharacterLogicRef_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_ControlledPawn = { "ControlledPawn", nullptr, (EPropertyFlags)0x0040000000020015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, ControlledPawn), Z_Construct_UClass_AThirdPersonCharacter_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ControlledPawn_MetaData), NewProp_ControlledPawn_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_SpringArmComponentRef = { "SpringArmComponentRef", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, SpringArmComponentRef), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SpringArmComponentRef_MetaData), NewProp_SpringArmComponentRef_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_MovementComponentRef = { "MovementComponentRef", nullptr, (EPropertyFlags)0x00400000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, MovementComponentRef), Z_Construct_UClass_UCharacterMovementComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MovementComponentRef_MetaData), NewProp_MovementComponentRef_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_CharacterLogicRef = { "CharacterLogicRef", nullptr, (EPropertyFlags)0x0040000000020015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, CharacterLogicRef), Z_Construct_UClass_UCharacterLogic_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterLogicRef_MetaData), NewProp_CharacterLogicRef_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_InputMappingContext = { "InputMappingContext", nullptr, (EPropertyFlags)0x0040000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, InputMappingContext), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InputMappingContext_MetaData), NewProp_InputMappingContext_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_MoveInputAction = { "MoveInputAction", nullptr, (EPropertyFlags)0x0040000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, MoveInputAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MoveInputAction_MetaData), NewProp_MoveInputAction_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APC_Main_Statics::NewProp_RotateInputAction = { "RotateInputAction", nullptr, (EPropertyFlags)0x0040000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(APC_Main, RotateInputAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RotateInputAction_MetaData), NewProp_RotateInputAction_MetaData) };
@@ -324,10 +328,10 @@ APC_Main::~APC_Main() {}
 struct Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h__Script_RGO_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_APC_Main, APC_Main::StaticClass, TEXT("APC_Main"), &Z_Registration_Info_UClass_APC_Main, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APC_Main), 3347518937U) },
+		{ Z_Construct_UClass_APC_Main, APC_Main::StaticClass, TEXT("APC_Main"), &Z_Registration_Info_UClass_APC_Main, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APC_Main), 3918302470U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h__Script_RGO_1203540274(TEXT("/Script/RGO"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h__Script_RGO_1919920509(TEXT("/Script/RGO"),
 	Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h__Script_RGO_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_PC_Main_h__Script_RGO_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

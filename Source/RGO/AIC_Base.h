@@ -7,11 +7,19 @@
 #include "AIC_Base.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class RGO_API AAIC_Base : public ADetourCrowdAIController
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+
+protected:
+    virtual void BeginPlay() override;
+
+protected:
+    UPROPERTY(EditDefaultsOnly, Category = "BehaviorTree")
+    UBehaviorTree* BehaviorTree;
+
+    void StartBehaviorTree();
 };

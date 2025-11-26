@@ -64,6 +64,9 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Command")
     bool CommandReloadWeapon();
 
+    UFUNCTION(BlueprintCallable, Category = "Command")
+    bool CommandTurnTarget(FRotator const& Rotator);
+
     // Movement
 public:
     UPROPERTY(BlueprintAssignable, Category = "Movement")
@@ -141,4 +144,15 @@ public:
     // Health
 protected:
     virtual void HandleDeath() override;
+
+    // Teams
+protected:
+    int32 Team = 0;
+
+public:
+    UFUNCTION(BlueprintCallable, Category = " Teams")
+    void SetTeam(int32 NewTeam) { Team = NewTeam; }
+
+    UFUNCTION(BlueprintCallable, Category = " Teams")
+    int32 GetTeam() const { return Team; }
 };

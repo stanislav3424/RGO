@@ -33,6 +33,18 @@
     <Filter Include="Source\RGO">
       <UniqueIdentifier>{7D8E12D2-23A3-3F70-8126-0D639BC17DFD}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\RGO\AIC_Base.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\AIC_Base.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\RGO\BTS_ItemLogicList_Base.cpp">
+      <Filter>Source\RGO</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\RGO\BTS_UpdatePerceptionList.h">
+      <Filter>Source\RGO</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\RGO\CharacterLogic.cpp">
       <Filter>Source\RGO</Filter>
     </ClCompile>

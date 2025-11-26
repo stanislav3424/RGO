@@ -12,6 +12,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeCharacterLogic() {}
 
 // ********** Begin Cross Module References ********************************************************
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 ENGINE_API UClass* Z_Construct_UClass_UCharacterMovementComponent_NoRegister();
 RGO_API UClass* Z_Construct_UClass_UCharacterLogic();
 RGO_API UClass* Z_Construct_UClass_UCharacterLogic_NoRegister();
@@ -354,6 +355,61 @@ DEFINE_FUNCTION(UCharacterLogic::execCommandShootStarted)
 }
 // ********** End Class UCharacterLogic Function CommandShootStarted *******************************
 
+// ********** Begin Class UCharacterLogic Function CommandTurnTarget *******************************
+struct Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics
+{
+	struct CharacterLogic_eventCommandTurnTarget_Parms
+	{
+		FRotator Rotator;
+		bool ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Command" },
+		{ "ModuleRelativePath", "CharacterLogic.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Rotator_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FStructPropertyParams NewProp_Rotator;
+	static void NewProp_ReturnValue_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::NewProp_Rotator = { "Rotator", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(CharacterLogic_eventCommandTurnTarget_Parms, Rotator), Z_Construct_UScriptStruct_FRotator, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Rotator_MetaData), NewProp_Rotator_MetaData) };
+void Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+{
+	((CharacterLogic_eventCommandTurnTarget_Parms*)Obj)->ReturnValue = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(CharacterLogic_eventCommandTurnTarget_Parms), &Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::NewProp_Rotator,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UCharacterLogic, nullptr, "CommandTurnTarget", Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::PropPointers), sizeof(Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::CharacterLogic_eventCommandTurnTarget_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04C20401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::Function_MetaDataParams), Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::CharacterLogic_eventCommandTurnTarget_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UCharacterLogic::execCommandTurnTarget)
+{
+	P_GET_STRUCT_REF(FRotator,Z_Param_Out_Rotator);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(bool*)Z_Param__Result=P_THIS->CommandTurnTarget(Z_Param_Out_Rotator);
+	P_NATIVE_END;
+}
+// ********** End Class UCharacterLogic Function CommandTurnTarget *********************************
+
 // ********** Begin Class UCharacterLogic Function EquipItem ***************************************
 struct Z_Construct_UFunction_UCharacterLogic_EquipItem_Statics
 {
@@ -585,6 +641,48 @@ DEFINE_FUNCTION(UCharacterLogic::execGetMovementState)
 }
 // ********** End Class UCharacterLogic Function GetMovementState **********************************
 
+// ********** Begin Class UCharacterLogic Function GetTeam *****************************************
+struct Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics
+{
+	struct CharacterLogic_eventGetTeam_Parms
+	{
+		int32 ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Teams" },
+		{ "ModuleRelativePath", "CharacterLogic.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FIntPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(CharacterLogic_eventGetTeam_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UCharacterLogic, nullptr, "GetTeam", Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::PropPointers), sizeof(Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::CharacterLogic_eventGetTeam_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::Function_MetaDataParams), Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::CharacterLogic_eventGetTeam_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UCharacterLogic_GetTeam()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UCharacterLogic_GetTeam_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UCharacterLogic::execGetTeam)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(int32*)Z_Param__Result=P_THIS->GetTeam();
+	P_NATIVE_END;
+}
+// ********** End Class UCharacterLogic Function GetTeam *******************************************
+
 // ********** Begin Class UCharacterLogic Function GetTypeMovementState ****************************
 struct Z_Construct_UFunction_UCharacterLogic_GetTypeMovementState_Statics
 {
@@ -678,6 +776,49 @@ DEFINE_FUNCTION(UCharacterLogic::execHandleRunInput)
 }
 // ********** End Class UCharacterLogic Function HandleRunInput ************************************
 
+// ********** Begin Class UCharacterLogic Function SetTeam *****************************************
+struct Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics
+{
+	struct CharacterLogic_eventSetTeam_Parms
+	{
+		int32 NewTeam;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Teams" },
+		{ "ModuleRelativePath", "CharacterLogic.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FIntPropertyParams NewProp_NewTeam;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::NewProp_NewTeam = { "NewTeam", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(CharacterLogic_eventSetTeam_Parms, NewTeam), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::NewProp_NewTeam,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_UCharacterLogic, nullptr, "SetTeam", Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::PropPointers), sizeof(Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::CharacterLogic_eventSetTeam_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::Function_MetaDataParams), Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::Function_MetaDataParams)},  };
+static_assert(sizeof(Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::CharacterLogic_eventSetTeam_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_UCharacterLogic_SetTeam()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UCharacterLogic_SetTeam_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(UCharacterLogic::execSetTeam)
+{
+	P_GET_PROPERTY(FIntProperty,Z_Param_NewTeam);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->SetTeam(Z_Param_NewTeam);
+	P_NATIVE_END;
+}
+// ********** End Class UCharacterLogic Function SetTeam *******************************************
+
 // ********** Begin Class UCharacterLogic Function TakeOffItem *************************************
 struct Z_Construct_UFunction_UCharacterLogic_TakeOffItem_Statics
 {
@@ -738,13 +879,16 @@ void UCharacterLogic::StaticRegisterNativesUCharacterLogic()
 		{ "CommandReloadWeapon", &UCharacterLogic::execCommandReloadWeapon },
 		{ "CommandShootCompleted", &UCharacterLogic::execCommandShootCompleted },
 		{ "CommandShootStarted", &UCharacterLogic::execCommandShootStarted },
+		{ "CommandTurnTarget", &UCharacterLogic::execCommandTurnTarget },
 		{ "EquipItem", &UCharacterLogic::execEquipItem },
 		{ "GetCurrentStamina", &UCharacterLogic::execGetCurrentStamina },
 		{ "GetItemInSlot", &UCharacterLogic::execGetItemInSlot },
 		{ "GetMaxStamina", &UCharacterLogic::execGetMaxStamina },
 		{ "GetMovementState", &UCharacterLogic::execGetMovementState },
+		{ "GetTeam", &UCharacterLogic::execGetTeam },
 		{ "GetTypeMovementState", &UCharacterLogic::execGetTypeMovementState },
 		{ "HandleRunInput", &UCharacterLogic::execHandleRunInput },
+		{ "SetTeam", &UCharacterLogic::execSetTeam },
 		{ "TakeOffItem", &UCharacterLogic::execTakeOffItem },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -862,13 +1006,16 @@ struct Z_Construct_UClass_UCharacterLogic_Statics
 		{ &Z_Construct_UFunction_UCharacterLogic_CommandReloadWeapon, "CommandReloadWeapon" }, // 3684059600
 		{ &Z_Construct_UFunction_UCharacterLogic_CommandShootCompleted, "CommandShootCompleted" }, // 2761801932
 		{ &Z_Construct_UFunction_UCharacterLogic_CommandShootStarted, "CommandShootStarted" }, // 1091571187
+		{ &Z_Construct_UFunction_UCharacterLogic_CommandTurnTarget, "CommandTurnTarget" }, // 3015734364
 		{ &Z_Construct_UFunction_UCharacterLogic_EquipItem, "EquipItem" }, // 1928794031
 		{ &Z_Construct_UFunction_UCharacterLogic_GetCurrentStamina, "GetCurrentStamina" }, // 1470737019
 		{ &Z_Construct_UFunction_UCharacterLogic_GetItemInSlot, "GetItemInSlot" }, // 1265149041
 		{ &Z_Construct_UFunction_UCharacterLogic_GetMaxStamina, "GetMaxStamina" }, // 4046700037
 		{ &Z_Construct_UFunction_UCharacterLogic_GetMovementState, "GetMovementState" }, // 4206907882
+		{ &Z_Construct_UFunction_UCharacterLogic_GetTeam, "GetTeam" }, // 3231454181
 		{ &Z_Construct_UFunction_UCharacterLogic_GetTypeMovementState, "GetTypeMovementState" }, // 3945210810
 		{ &Z_Construct_UFunction_UCharacterLogic_HandleRunInput, "HandleRunInput" }, // 1439331942
+		{ &Z_Construct_UFunction_UCharacterLogic_SetTeam, "SetTeam" }, // 1236716319
 		{ &Z_Construct_UFunction_UCharacterLogic_TakeOffItem, "TakeOffItem" }, // 1723955678
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -963,10 +1110,10 @@ struct Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source
 		{ ETypeMovementState_StaticEnum, TEXT("ETypeMovementState"), &Z_Registration_Info_UEnum_ETypeMovementState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1163939612U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UCharacterLogic, UCharacterLogic::StaticClass, TEXT("UCharacterLogic"), &Z_Registration_Info_UClass_UCharacterLogic, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UCharacterLogic), 179654430U) },
+		{ Z_Construct_UClass_UCharacterLogic, UCharacterLogic::StaticClass, TEXT("UCharacterLogic"), &Z_Registration_Info_UClass_UCharacterLogic, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UCharacterLogic), 2740372129U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CharacterLogic_h__Script_RGO_1014726114(TEXT("/Script/RGO"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CharacterLogic_h__Script_RGO_1144171627(TEXT("/Script/RGO"),
 	Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CharacterLogic_h__Script_RGO_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CharacterLogic_h__Script_RGO_Statics::ClassInfo),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CharacterLogic_h__Script_RGO_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_Stas_Documents_Unreal_Projects_RGO_Source_RGO_CharacterLogic_h__Script_RGO_Statics::EnumInfo));

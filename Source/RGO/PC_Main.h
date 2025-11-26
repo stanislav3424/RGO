@@ -45,16 +45,16 @@ private:
     void TurnPawnToCursor();
 
 private:
-    UPROPERTY(VisibleInstanceOnly)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
     AThirdPersonCharacter* ControlledPawn;
 
-    UPROPERTY(VisibleInstanceOnly)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
     USpringArmComponent* SpringArmComponentRef;
 
-    UPROPERTY(VisibleInstanceOnly)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
     UCharacterMovementComponent* MovementComponentRef;
 
-    UPROPERTY(VisibleInstanceOnly)
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
     UCharacterLogic* CharacterLogicRef;
 
 private:

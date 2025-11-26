@@ -270,3 +270,8 @@ bool UCharacterLogic::CommandReloadWeapon()
     }
     return false;
 }
+
+bool UCharacterLogic::CommandTurnTarget(FRotator const& Rotator)
+{
+    return false;
+}

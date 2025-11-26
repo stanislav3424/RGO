@@ -29,13 +29,13 @@ void EmptyLinkFunctionForGeneratedCodeRGO_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x275DED40,
-				0x3760FB2B,
+				0x44CDA8FA,
+				0xB5F420FA,
 				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_RGO.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_RGO.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_RGO(Z_Construct_UPackage__Script_RGO, TEXT("/Script/RGO"), Z_Registration_Info_UPackage__Script_RGO, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x275DED40, 0x3760FB2B));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_RGO(Z_Construct_UPackage__Script_RGO, TEXT("/Script/RGO"), Z_Registration_Info_UPackage__Script_RGO, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x44CDA8FA, 0xB5F420FA));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

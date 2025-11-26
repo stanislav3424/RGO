@@ -49,7 +49,7 @@ public:
     // Active
 private:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Active", meta = (AllowPrivateAccess = "true"))
-    bool bIsAutoActive = false;
+    bool bIsAutoActive = true;
 
     UPROPERTY(BlueprintReadOnly, Category = "Active", meta = (AllowPrivateAccess = "true"))
     bool bIsActive = false;
