@@ -6,6 +6,8 @@
 #include "UObject/Object.h"
 #include "ItemLogic.generated.h"
 
+class UGameInstance_Main;
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHealthChanged, float, CurrentHealth, float, MaxHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDeath, UItemLogic*, ItemLogic);
 
@@ -25,6 +27,9 @@ protected:
     UPROPERTY(BlueprintReadOnly, Category = "ItemLogic")
     FName ItemName;
 
+    UPROPERTY(BlueprintReadOnly, Category = "ItemLogic")
+    UGameInstance_Main* GameInstance_Main;
+
 public:
     UItemLogic();
 
@@ -35,6 +40,7 @@ public:
     virtual void Shutdown();
 
 protected:
+    virtual void UploadingData();
     virtual void CheckField();
 
     // OwnerActor

@@ -14,6 +14,7 @@ void UItemLogic::InitializeName(FName const& SetItemName)
 {
     ItemName = SetItemName;
     Initialize();
+    UploadingData();
     CheckField();
 }
 
@@ -27,6 +28,7 @@ void UItemLogic::Initialize()
         {
             auto ItemRow = GameInstance->GetItemRow(ItemName);
             OwnerActorClass = ItemRow.ActorClass;
+            GameInstance_Main = GameInstance;
         }
 
 
@@ -44,9 +46,14 @@ void UItemLogic::Shutdown()
     bIsInitialized = false;
 }
 
+void UItemLogic::UploadingData()
+{
+}
+
 void UItemLogic::CheckField()
 {
     CHECK_FIELD(OwnerActorClass);
+    CHECK_FIELD(GameInstance_Main);
     CHECK_INDEX_NONE(MaxHealth);
     CHECK_INDEX_NONE(CurrentHealth);
 }

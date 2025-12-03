@@ -124,7 +124,7 @@ void APC_Main::RunTest()
         ControlledPawn->AutomaticActivation();
         if (auto GameInstance = GetGameInstance<UGameInstance_Main>())
         {
-            auto WeaponLogic = GameInstance->CreateItemLogic(TEXT("Test_2"));
+            auto WeaponLogic = GameInstance->CreateItemLogic(TEXT("AK-47"));
 
             auto CharacterLogic = IItemLogicInterface::Execute_GetItemLogic(ControlledPawn);
             CharacterLogicRef   = Cast<UCharacterLogic>(CharacterLogic);

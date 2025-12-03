@@ -8,18 +8,12 @@
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "Animation/AnimInstance.h"
-
-UWeaponLogic::UWeaponLogic()
-{
-}
+#include "GameInstance_Main.h"
 
 void UWeaponLogic::Initialize()
 {
-    CurrentAmmo        = MaxAmmo;
-    CurrentWeaponState = EWeaponState::Idle;
-    bIsInputBlocked    = false;
-
     Super::Initialize();
+
 }
 
 void UWeaponLogic::Tick(float DeltaTime)
@@ -31,7 +25,22 @@ void UWeaponLogic::Shutdown()
 {
     StopShooting();
     CancelReload();
+
     Super::Shutdown();
+}
+
+void UWeaponLogic::UploadingData()
+{
+    Super::UploadingData();
+
+    if (!GameInstance_Main)
+        return;
+
+    auto Row    = GameInstance_Main->GetItemRowTyped<FWeaponItemRow>(ItemName);
+    MaxAmmo     = Row.MaxAmmo;
+    CurrentAmmo = MaxAmmo;
+    Damage      = Row.Damage;
+    RateFire    = 60.f / Row.RateFire;
 }
 
 void UWeaponLogic::CheckField()

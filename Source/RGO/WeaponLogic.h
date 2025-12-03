@@ -38,13 +38,12 @@ class RGO_API UWeaponLogic : public UItemLogic
 
     // ItemLogic
 public:
-    UWeaponLogic();
-
     virtual void Initialize() override;
     virtual void Tick(float DeltaTime) override;
     virtual void Shutdown() override;
 
 protected:
+    virtual void UploadingData() override;
     virtual void CheckField() override;
 
     UPROPERTY(BlueprintReadOnly, Category = "ItemLogic")
@@ -130,16 +129,16 @@ private:
     FTimerHandle ReloadTimerHandle;
 
     UPROPERTY(VisibleInstanceOnly, Category = "Combat");
-    int32 MaxAmmo = 30;
+    int32 MaxAmmo = INDEX_NONE;
 
     UPROPERTY(VisibleInstanceOnly, Category = "Combat");
-    int32 CurrentAmmo = 30;
+    int32 CurrentAmmo = INDEX_NONE;
 
     UPROPERTY(VisibleInstanceOnly, Category = "Combat");
-    float RateFire = 0.1f;
+    float RateFire = INDEX_NONE;
 
     UPROPERTY(VisibleInstanceOnly, Category = "Combat")
-    float Damage = 5.0f;
+    float Damage = INDEX_NONE;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
     bool bAutoReload = true;
