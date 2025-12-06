@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "WeaponActor.generated.h"
 
+
 UCLASS()
 class RGO_API AWeaponActor : public AActor
 {
@@ -19,9 +20,11 @@ protected:
 
 public:
     virtual void Tick(float DeltaTime) override;
-    // Ñomponents
 
+    // Ñomponents
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
     USkeletalMeshComponent* SkeletalMeshComponent;
+
+
 };

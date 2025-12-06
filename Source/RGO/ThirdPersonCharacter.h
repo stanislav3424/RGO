@@ -3,16 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
-#include "ItemLogicInterface.h"
+#include "BaseCharacter.h"
+
 #include "ThirdPersonCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
-class UCharacterLogic;
+
 
 UCLASS()
-class RGO_API AThirdPersonCharacter : public ACharacter, public IItemLogicInterface
+class RGO_API AThirdPersonCharacter : public ABaseCharacter
 {
     GENERATED_BODY()
 
@@ -24,15 +24,6 @@ protected:
 
 public:
     virtual void Tick(float DeltaTime) override;
-
-    // ItemLogicInterface
-public:
-    virtual UItemLogic* GetItemLogic_Implementation() override;
-    virtual void        SetItemLogic_Implementation(UItemLogic* NewItemLogic) override;
-
-private:
-    UPROPERTY()
-    UCharacterLogic* CharacterLogic;
 
     //
 
@@ -46,16 +37,6 @@ private:
 public:
     USpringArmComponent* GetSpringArmComponent() { return SpringArmComponent; };
 
-    // Active
-private:
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Active", meta = (AllowPrivateAccess = "true"))
-    bool bIsAutoActive = true;
-
-    UPROPERTY(BlueprintReadOnly, Category = "Active", meta = (AllowPrivateAccess = "true"))
-    bool bIsActive = false;
-
-public:
-    UFUNCTION(BlueprintCallable, Category = "Active")
-    void AutomaticActivation();
+    
     
 };

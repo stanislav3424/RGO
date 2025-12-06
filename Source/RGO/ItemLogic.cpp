@@ -13,9 +13,16 @@ UItemLogic::UItemLogic()
 void UItemLogic::InitializeName(FName const& SetItemName)
 {
     ItemName = SetItemName;
-    Initialize();
+
+    if (auto World = GetWorld())
+        if (auto GameInstance = World->GetGameInstance<UGameInstance_Main>())
+            GameInstance_Main = GameInstance;
+
     UploadingData();
+    Initialize();
     CheckField();
+
+    bIsActive      = true;
 }
 
 void UItemLogic::Initialize()
@@ -23,17 +30,8 @@ void UItemLogic::Initialize()
     if (bIsInitialized)
         return;
 
-    if (auto World = GetWorld())
-        if (auto GameInstance = World->GetGameInstance<UGameInstance_Main>())
-        {
-            auto ItemRow = GameInstance->GetItemRow(ItemName);
-            OwnerActorClass = ItemRow.ActorClass;
-            GameInstance_Main = GameInstance;
-        }
-
-
     bIsInitialized = true;
-    bIsActive      = true;
+
 }
 
 void UItemLogic::Tick(float DeltaTime)
@@ -48,6 +46,15 @@ void UItemLogic::Shutdown()
 
 void UItemLogic::UploadingData()
 {
+    if (!GameInstance_Main)
+        return;
+
+    auto Row = GameInstance_Main->GetItemRowTyped<FBaseItemRow>(ItemName);
+
+    OwnerActorClass = Row.ActorClass;
+    MaxHealth       = Row.MaxHealth;
+    CurrentHealth   = MaxHealth;
+    bCanTakeDamage  = Row.bCanTakeDamage;
 }
 
 void UItemLogic::CheckField()

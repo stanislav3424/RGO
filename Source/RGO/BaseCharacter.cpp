@@ -2,33 +2,50 @@
 
 
 #include "BaseCharacter.h"
+#include "CharacterLogic.h"
+#include "GameInstance_Main.h"
+#include "Macros.h"
 
-// Sets default values
 ABaseCharacter::ABaseCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
 
-// Called when the game starts or when spawned
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+    if (bIsAutoActive)
+        AutomaticActivation();
 }
 
-// Called every frame
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (CharacterLogic)
+        CharacterLogic->Tick(DeltaTime);
 }
 
-// Called to bind functionality to input
-void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+
+UItemLogic* ABaseCharacter::GetItemLogic_Implementation()
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+    return CharacterLogic;
 }
 
+void ABaseCharacter::SetItemLogic_Implementation(UItemLogic* NewItemLogic)
+{
+    if (auto NewCharacterLogic = Cast<UCharacterLogic>(NewItemLogic))
+        CharacterLogic = NewCharacterLogic;
+    CHECK_FIELD(CharacterLogic);
+}
+
+void ABaseCharacter::AutomaticActivation()
+{
+    if (bIsActive)
+        return;
+
+    if (auto GameInstance = GetGameInstance<UGameInstance_Main>())
+        bIsActive = GameInstance->AutomaticActivation(this);
+}

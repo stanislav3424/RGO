@@ -7,12 +7,13 @@
 #include "FunctionLibrary.h"
 #include "Macros.h"
 #include "Components/CapsuleComponent.h"
+#include "GameInstance_Main.h"
+#include "AIController.h"
 
 void UCharacterLogic::Initialize()
 {
     Super::Initialize();
 
-    bCanTakeDamage = true;
 }
 
 void UCharacterLogic::Tick(float DeltaTime)
@@ -25,13 +26,28 @@ void UCharacterLogic::Tick(float DeltaTime)
     UpdateStamina(DeltaTime);
     UpdateMovementState();
     UpdatePawnMaxSpeed();
-
 }
 
 void UCharacterLogic::Shutdown()
 {
 
     Super::Shutdown();
+}
+
+void UCharacterLogic::UploadingData()
+{
+    Super::UploadingData();
+
+    if (!GameInstance_Main)
+        return;
+
+    auto Row = GameInstance_Main->GetItemRowTyped<FCharacterItemRow>(ItemName);
+
+    MaxStamina       = Row.MaxStamina;
+    CurrentStamina   = MaxStamina;
+    StaminaDrainRate = Row.StaminaDrainRate;
+    StaminaRegenRate = Row.StaminaRegenRate;
+    MinStaminaToRun  = Row.MinStaminaToRun;
 }
 
 void UCharacterLogic::CheckField()
@@ -237,6 +253,20 @@ void UCharacterLogic::HandleDeath()
             if (auto Movement = Character->GetCharacterMovement())
             {
                 Movement->DisableMovement();
+            }
+
+            if (auto Controller = Character->GetController())
+            {
+                if (auto AIController = Cast<AAIController>(Controller))
+                {
+                    AIController->StopMovement();
+                    AIController->UnPossess();
+                    AIController->Destroy();
+                }
+                else
+                {
+                    Controller->UnPossess();
+                }
             }
         }
     }

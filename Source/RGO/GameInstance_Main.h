@@ -20,6 +20,12 @@ struct FBaseItemRow : public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     TSubclassOf<AActor> ActorClass;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float MaxHealth = 100.f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool bCanTakeDamage = false;
 };
 
 USTRUCT(BlueprintType)
@@ -36,6 +42,24 @@ struct FWeaponItemRow : public FBaseItemRow
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 RateFire = 100;
 
+};
+
+USTRUCT(BlueprintType)
+struct FCharacterItemRow : public FBaseItemRow
+{
+    GENERATED_BODY()
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float MaxStamina = 100.f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float StaminaDrainRate = 10.f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float StaminaRegenRate = 5.f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float MinStaminaToRun = 25.f;
 };
 
 UCLASS()
@@ -90,17 +114,37 @@ public:
     {
         if (const uint8* const* RawPtr = RowRawDataByName.Find(RowName))
         {
-            UScriptStruct* Stored = RowStructByName.FindRef(RowName);
-            if (Stored && Stored == TypeRow::StaticStruct())
+            UScriptStruct* Stored    = RowStructByName.FindRef(RowName);
+            UScriptStruct* Requested = TypeRow::StaticStruct();
+
+            if (!Stored || !Requested)
             {
-                TypeRow Result;
-                Stored->CopyScriptStruct(&Result, *RawPtr);
-                return Result;
+                UE_LOG(LogTemp, Error, TEXT("[%s] Row '%s' type mismatch or missing struct. Stored=%s Requested=%s"),
+                    *FString(__FUNCTION__), *RowName.ToString(), Stored ? *Stored->GetName() : TEXT("null"),
+                    Requested ? *Requested->GetName() : TEXT("null"));
+                return TypeRow{};
             }
-            UE_LOG(LogTemp, Error, TEXT("[%s] Row '%s' type mismatch or missing struct. Stored=%s Requested=%s"),
-                *FString(__FUNCTION__), *RowName.ToString(), Stored ? *Stored->GetName() : TEXT("null"),
-                *TypeRow::StaticStruct()->GetName());
-            return TypeRow{};
+
+            bool bIsCompatible = false;
+            for (UStruct* Struct = Stored; Struct != nullptr; Struct = Struct->GetSuperStruct())
+            {
+                if (Struct == Requested)
+                {
+                    bIsCompatible = true;
+                    break;
+                }
+            }
+
+            if (!bIsCompatible)
+            {
+                UE_LOG(LogTemp, Error, TEXT("[%s] Row '%s' type mismatch or missing struct. Stored=%s Requested=%s"),
+                    *FString(__FUNCTION__), *RowName.ToString(), *Stored->GetName(), *Requested->GetName());
+                return TypeRow{};
+            }
+
+            TypeRow Result;
+            Requested->CopyScriptStruct(&Result, *RawPtr);
+            return Result;
         }
 
         UE_LOG(LogTemp, Error, TEXT("[%s] Row '%s' not found in cache."), *FString(__FUNCTION__), *RowName.ToString());

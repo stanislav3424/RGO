@@ -82,10 +82,10 @@ public:
 
 protected:
     UPROPERTY(BlueprintReadOnly, Category = "Health")
-    float MaxHealth = 100.0f;
+    float MaxHealth = INDEX_NONE;
 
     UPROPERTY(BlueprintReadOnly, Category = "Health")
-    float CurrentHealth = 100.0f;
+    float CurrentHealth = INDEX_NONE;
 
     UPROPERTY(BlueprintReadOnly, Category = "Health")
     bool bCanTakeDamage = false;

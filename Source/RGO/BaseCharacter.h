@@ -4,26 +4,45 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "ItemLogicInterface.h"
 #include "BaseCharacter.generated.h"
 
-UCLASS()
-class RGO_API ABaseCharacter : public ACharacter
+class UCharacterLogic;
+
+UCLASS(Abstract)
+class RGO_API ABaseCharacter : public ACharacter, public IItemLogicInterface
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	ABaseCharacter();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+
+	// ItemLogicInterface
+public:
+    virtual UItemLogic* GetItemLogic_Implementation() override;
+    virtual void        SetItemLogic_Implementation(UItemLogic* NewItemLogic) override;
+
+protected:
+    UPROPERTY()
+    UCharacterLogic* CharacterLogic;
+
+	// Active
+protected:
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Active", meta = (AllowPrivateAccess = "true"))
+    bool bIsAutoActive = true;
+
+    UPROPERTY(BlueprintReadOnly, Category = "Active", meta = (AllowPrivateAccess = "true"))
+    bool bIsActive = false;
+
+public:
+    UFUNCTION(BlueprintCallable, Category = "Active")
+    void AutomaticActivation();
 };

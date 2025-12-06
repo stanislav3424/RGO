@@ -8,6 +8,7 @@
 
 class ACharacter;
 class UAnimMontage;
+class UNiagaraSystem;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnAmmoChanged, int32, CurrentAmmo, int32, MaxAmmo);
 
@@ -45,6 +46,7 @@ public:
 protected:
     virtual void UploadingData() override;
     virtual void CheckField() override;
+    virtual void UpdateOwnerActor(AActor* Actor);
 
     UPROPERTY(BlueprintReadOnly, Category = "ItemLogic")
     ACharacter* AttachmentParent;
@@ -59,6 +61,9 @@ protected:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
     UAnimMontage* ReloadAnimMontage;
+
+    UPROPERTY(BlueprintReadOnly, Category = "FX")
+    UNiagaraSystem* BulletEffect;
 
     // Weapon State
 protected:
@@ -92,6 +97,15 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Combat")
     void PerformShoot();
 
+protected:
+    void PlayShootAnimation();
+    void SpawnBulletEffect(const FVector& Start, const FVector& End);
+    void CalculateShotDirection(FVector& OutStart, FVector& OutEnd);
+    bool PerformLineTrace(const FVector& Start, const FVector& End, FHitResult& OutHit);
+    void ApplyDamage(const FHitResult& Hit, const FVector& Start, const FVector& End);
+    void HandleAmmo();
+
+public:
     UFUNCTION(BlueprintCallable, Category = "Combat")
     bool ReloadWeapon();
 
@@ -144,5 +158,8 @@ private:
     bool bAutoReload = true;
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
-    float AutoReloadDelay = 1.0f;
+    float AutoReloadDelay = 1.f;
+
+    UPROPERTY(VisibleInstanceOnly, Category = "Combat")
+    float MOARadians = 1.f;
 };

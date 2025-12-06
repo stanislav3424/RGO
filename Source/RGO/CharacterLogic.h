@@ -40,6 +40,7 @@ public:
     virtual void Shutdown() override;
 
 protected:
+    virtual void UploadingData() override;
     virtual void CheckField() override;
 
     // OwnerActor
@@ -89,19 +90,19 @@ protected:
     ETypeMovementState TypeMovementState = ETypeMovementState::Unarmed;
 
     UPROPERTY(BlueprintReadOnly, Category = "Stamina")
-    float MaxStamina = 100.0f;
+    float MaxStamina = INDEX_NONE;
 
     UPROPERTY(BlueprintReadOnly, Category = "Stamina")
-    float CurrentStamina = 100.0f;
+    float CurrentStamina = INDEX_NONE;
 
     UPROPERTY(BlueprintReadOnly, Category = "Stamina")
-    float StaminaDrainRate = 30.0f;
+    float StaminaDrainRate = INDEX_NONE;
 
     UPROPERTY(BlueprintReadOnly, Category = "Stamina")
-    float StaminaRegenRate = 5.0f;
+    float StaminaRegenRate = INDEX_NONE;
 
     UPROPERTY(BlueprintReadOnly, Category = "Stamina")
-    float MinStaminaToRun = 25.0f;
+    float MinStaminaToRun = INDEX_NONE;
 
     UPROPERTY(BlueprintReadOnly, Category = "Movement")
     TMap<EEquipmentSlot, UWeaponLogic*> Equipment = { { EEquipmentSlot::RHand, nullptr } };

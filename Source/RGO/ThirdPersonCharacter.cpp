@@ -3,9 +3,7 @@
 #include "ThirdPersonCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "CharacterLogic.h"
-#include "GameInstance_Main.h"
-#include "Macros.h"
+
 
 AThirdPersonCharacter::AThirdPersonCharacter()
 {
@@ -35,36 +33,14 @@ void AThirdPersonCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
-    if (bIsAutoActive)
-        AutomaticActivation();
+    
 }
 
 void AThirdPersonCharacter::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (CharacterLogic)
-        CharacterLogic->Tick(DeltaTime);
+    
 }
 
-UItemLogic* AThirdPersonCharacter::GetItemLogic_Implementation()
-{
-    return CharacterLogic;
-}
 
-void AThirdPersonCharacter::SetItemLogic_Implementation(UItemLogic* NewItemLogic)
-{
-    if (auto NewCharacterLogic = Cast<UCharacterLogic>(NewItemLogic))
-        CharacterLogic = NewCharacterLogic;
-    CHECK_FIELD(CharacterLogic);
-}
-
-void AThirdPersonCharacter::AutomaticActivation()
-{
-    if (bIsActive)
-        return;
-
-    if(auto GameInstance = GetGameInstance<UGameInstance_Main>())
-        bIsActive = GameInstance->AutomaticActivation(this);
-
-}

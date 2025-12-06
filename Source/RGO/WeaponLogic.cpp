@@ -9,6 +9,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Animation/AnimInstance.h"
 #include "GameInstance_Main.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystem.h"
 
 void UWeaponLogic::Initialize()
 {
@@ -41,6 +43,11 @@ void UWeaponLogic::UploadingData()
     CurrentAmmo = MaxAmmo;
     Damage      = Row.Damage;
     RateFire    = 60.f / Row.RateFire;
+
+    float WeaponMOA = 100.0f;
+    MOARadians  = FMath::DegreesToRadians(WeaponMOA / 60.0f);
+
+    //BulletEffect = Row.BulletEffect;
 }
 
 void UWeaponLogic::CheckField()
@@ -50,6 +57,15 @@ void UWeaponLogic::CheckField()
     CHECK_INDEX_NONE(MaxAmmo);
     CHECK_INDEX_NONE(CurrentAmmo);
     CHECK_INDEX_NONE(RateFire);
+    CHECK_FIELD(ShootAnimMontage);
+    CHECK_FIELD(ReloadAnimMontage);
+    CHECK_FIELD(BulletEffect);
+}
+
+void UWeaponLogic::UpdateOwnerActor(AActor* Actor)
+{
+    Super::UpdateOwnerActor(Actor);
+
 }
 
 bool UWeaponLogic::SetAttachmentParent(AActor* Actor)
@@ -113,48 +129,94 @@ void UWeaponLogic::PerformShoot()
         return;
     }
 
+    FVector StartLocation;
+    FVector EndLocation;
+
+    PlayShootAnimation();
+    CalculateShotDirection(StartLocation, EndLocation);
+    SpawnBulletEffect(StartLocation, EndLocation);
+
+    FHitResult HitResult;
+    if (PerformLineTrace(StartLocation, EndLocation, HitResult))
+    {
+        ApplyDamage(HitResult, StartLocation, EndLocation);
+    }
+
+    HandleAmmo();
+}
+
+void UWeaponLogic::PlayShootAnimation()
+{
     if (IsValid(AttachmentParent) && ShootAnimMontage)
         if (auto MeshComponent = AttachmentParent->GetMesh())
             if (auto AnimInstance = MeshComponent->GetAnimInstance())
                 AnimInstance->Montage_Play(ShootAnimMontage);
+}
 
+void UWeaponLogic::SpawnBulletEffect(const FVector& StartLocation, const FVector& EndLocation)
+{
     if (IsValid(AttachmentParent))
         if (auto MeshComponent = AttachmentParent->GetMesh())
         {
             auto Transform = MeshComponent->GetSocketTransform(TEXT("weapon_r_muzzle"));
-            auto Rotator   = AttachmentParent->GetActorRotation();
+            FRotator Rotator   = (EndLocation - StartLocation).Rotation();
 
-            FVector StartLocation = Transform.GetLocation();
-            FVector EndLocation   = StartLocation + Rotator.Vector() * 2000.0f;
-
-            FHitResult            HitResult;
-            FCollisionQueryParams CollisionParams;
-
-            if (auto World = GetWorld())
+            if (BulletEffect)
             {
-                World->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
-
-                FColor TraceColor = HitResult.bBlockingHit ? FColor::Red : FColor::Green;
-                float  DrawTime   = 1.0f;
-
-                DrawDebugLine(GetWorld(), StartLocation, HitResult.bBlockingHit ? HitResult.Location : EndLocation,
-                    TraceColor, false, DrawTime);
-
-                if (HitResult.bBlockingHit)
-                {
-                    DrawDebugPoint(GetWorld(), HitResult.Location, 10.0f, FColor::Red, false, DrawTime);
-                    AActor* HitActor = HitResult.GetActor();
-                    if (HitActor && HitActor != AttachmentParent)
-                    {
-                        const FVector ShotDirection = (EndLocation - StartLocation).GetSafeNormal();
-
-                        UGameplayStatics::ApplyPointDamage(HitActor, Damage, ShotDirection, HitResult, nullptr,
-                            AttachmentParent, UDamageType::StaticClass());
-                    }
-                }
+                UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+                    GetWorld(), BulletEffect, Transform.GetLocation(), Rotator);
             }
         }
+}
 
+void UWeaponLogic::CalculateShotDirection(FVector& StartLocation, FVector& EndLocation)
+{
+    if (auto MeshComponent = AttachmentParent->GetMesh())
+    {
+        auto Transform = MeshComponent->GetSocketTransform(TEXT("weapon_r_muzzle"));
+        StartLocation       = Transform.GetLocation();
+
+        FVector Forward = AttachmentParent->GetActorRotation().Vector();
+
+        
+
+        FVector RandomSpread = FMath::VRandCone(Forward, MOARadians);
+
+        EndLocation = StartLocation + RandomSpread * 2000.0f;
+    }
+}
+
+bool UWeaponLogic::PerformLineTrace(const FVector& StartLocation, const FVector& EndLocation, FHitResult& OutHit)
+{
+    if (auto World = GetWorld())
+    {
+        FCollisionQueryParams Params;
+        bool                  bHit = World->LineTraceSingleByChannel(OutHit, StartLocation, EndLocation, ECC_Visibility, Params);
+
+        FColor TraceColor = bHit ? FColor::Red : FColor::Green;
+        //DrawDebugLine(World, Start, bHit ? OutHit.Location : End, TraceColor, false, 1.0f);
+
+        if (bHit)
+            DrawDebugPoint(World, OutHit.Location, 10.0f, FColor::Red, false, 1.0f);
+
+        return bHit;
+    }
+    return false;
+}
+
+void UWeaponLogic::ApplyDamage(const FHitResult& Hit, const FVector& Start, const FVector& End)
+{
+    auto HitActor = Hit.GetActor();
+    if (HitActor && HitActor != AttachmentParent)
+    {
+        const FVector ShotDirection = (End - Start).GetSafeNormal();
+        UGameplayStatics::ApplyPointDamage(
+            HitActor, Damage, ShotDirection, Hit, nullptr, AttachmentParent, UDamageType::StaticClass());
+    }
+}
+
+void UWeaponLogic::HandleAmmo()
+{
     --CurrentAmmo;
     OnAmmoChanged.Broadcast(CurrentAmmo, MaxAmmo);
 
