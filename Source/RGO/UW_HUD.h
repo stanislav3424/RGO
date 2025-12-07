@@ -10,6 +10,7 @@ class UProgressBar;
 class UTextBlock;
 class UCharacterLogic;
 class UWeaponLogic;
+class UBorder;
 
 UCLASS()
 class RGO_API UUW_HUD : public UUserWidget
@@ -42,6 +43,13 @@ public:
 
     UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
     UTextBlock* TimeTextBlock;
+
+    UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+    UBorder* BackgroundBorder;
+
+protected:
+    UPROPERTY(Transient)
+    UMaterialInstanceDynamic* VignetteMID;
 
 public:
     UFUNCTION()

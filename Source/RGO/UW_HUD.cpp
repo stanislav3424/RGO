@@ -7,6 +7,8 @@
 #include "CharacterLogic.h"
 #include "GM_Main.h"
 #include "Macros.h"
+#include "Components/Border.h"
+#include "Materials/MaterialInstanceDynamic.h"
 
 bool UUW_HUD::Initialize()
 {
@@ -103,6 +105,33 @@ void UUW_HUD::SetHealth(float CurrentHealth, float MaxHealth)
         return;
     float HealthPercent = FMath::Clamp(CurrentHealth / MaxHealth, 0.0f, 1.0f);
     HealthProgressBar->SetPercent(HealthPercent);
+    UE_LOG(LogTemp, Error, TEXT("1"));
+
+    if (!VignetteMID && BackgroundBorder)
+    {
+        const FSlateBrush& Brush  = BackgroundBorder->Background;
+        UMaterialInstance* BaseMI = Cast<UMaterialInstance>(Brush.GetResourceObject());
+        if (BaseMI)
+        {
+            VignetteMID = UMaterialInstanceDynamic::Create(BaseMI, this);
+            if (VignetteMID)
+            {
+                FSlateBrush NewBrush;
+                NewBrush.SetResourceObject(VignetteMID);
+                BackgroundBorder->SetBrush(NewBrush);
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    UE_LOG(LogTemp, Error, TEXT("2"));
+    float FillValue = 1.0f - HealthPercent;
+    VignetteMID->SetScalarParameterValue(TEXT("FillPercent"), FillValue);
+
+    float EnabledValue = (HealthPercent >= 1.0f) ? 0.0f : 1.0f;
+    VignetteMID->SetScalarParameterValue(TEXT("VignetteEnabled"), EnabledValue);
 }
 
 void UUW_HUD::SetStamina(float CurrentStamina, float MaxStamina)
