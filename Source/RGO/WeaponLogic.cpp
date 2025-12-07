@@ -38,16 +38,13 @@ void UWeaponLogic::UploadingData()
     if (!GameInstance_Main)
         return;
 
-    auto Row    = GameInstance_Main->GetItemRowTyped<FWeaponItemRow>(ItemName);
-    MaxAmmo     = Row.MaxAmmo;
-    CurrentAmmo = MaxAmmo;
-    Damage      = Row.Damage;
-    RateFire    = 60.f / Row.RateFire;
-
-    float WeaponMOA = 100.0f;
-    MOARadians  = FMath::DegreesToRadians(WeaponMOA / 60.0f);
-
-    //BulletEffect = Row.BulletEffect;
+    auto Row     = GameInstance_Main->GetItemRowTyped<FWeaponItemRow>(ItemName);
+    MaxAmmo      = Row.MaxAmmo;
+    CurrentAmmo  = MaxAmmo;
+    Damage       = Row.Damage;
+    RateFire     = 60.f / Row.RateFire;
+    MOARadians   = FMath::DegreesToRadians(Row.WeaponMOA);
+    BulletEffect = Row.BulletEffect;
 }
 
 void UWeaponLogic::CheckField()

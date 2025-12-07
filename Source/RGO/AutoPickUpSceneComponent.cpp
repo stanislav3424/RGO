@@ -1,34 +1,73 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "AutoPickUpSceneComponent.h"
+#include "CharacterLogic.h"
+#include "ItemLogicInterface.h"
+#include "Macros.h"
+#include "Components/SphereComponent.h"
 
-// Sets default values for this component's properties
 UAutoPickUpSceneComponent::UAutoPickUpSceneComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+    PickUpSphere = CreateDefaultSubobject<USphereComponent>(TEXT("PickupSphere"));
+    if (PickUpSphere)
+    {
+        PickUpSphere->SetupAttachment(this);
+        PickUpSphere->InitSphereRadius(150.f);
+        PickUpSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+        PickUpSphere->SetCollisionResponseToAllChannels(ECR_Overlap);
+        PickUpSphere->SetHiddenInGame(false);
+    }
 }
 
-
-// Called when the game starts
 void UAutoPickUpSceneComponent::BeginPlay()
 {
-	Super::BeginPlay();
+    Super::BeginPlay();
 
-	// ...
-	
+    if (auto Owner = GetOwner())
+        if (Owner->Implements<UItemLogicInterface>())
+            CharacterLogicOwner = Cast<UCharacterLogic>(IItemLogicInterface::Execute_GetItemLogic(Owner));
+
+    CHECK_FIELD(CharacterLogicOwner);
+
+    if (PickUpSphere)
+    {
+        PickUpSphere->OnComponentBeginOverlap.AddDynamic(this, &UAutoPickUpSceneComponent::OnPickupBeginOverlap);
+        PickUpSphere->OnComponentEndOverlap.AddDynamic(this, &UAutoPickUpSceneComponent::OnPickupEndOverlap);
+    }
 }
 
-
-// Called every frame
-void UAutoPickUpSceneComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UAutoPickUpSceneComponent::TickComponent(
+    float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+    Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+}
 
-	// ...
+void UAutoPickUpSceneComponent::OnPickupBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+    UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+    
+    if (!OtherActor || OtherActor == GetOwner())
+        return;
+
+    if (OtherActor->Implements<UItemLogicInterface>())
+    {
+        if (CharacterLogicOwner)
+        {
+            CharacterLogicOwner->GiveItemActor(OtherActor);
+        }
+    }
+}
+
+void UAutoPickUpSceneComponent::OnPickupEndOverlap(
+    UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+    if (!OtherActor || OtherActor == GetOwner())
+        return;
+
+    if (OtherActor->Implements<UItemLogicInterface>())
+    {
+    }
 }
 

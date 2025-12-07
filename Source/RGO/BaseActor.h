@@ -8,6 +8,7 @@
 #include "BaseActor.generated.h"
 
 class UItemnLogic;
+class USphereComponent;
 
 UCLASS()
 class RGO_API ABaseActor : public AActor, public IItemLogicInterface
@@ -15,6 +16,8 @@ class RGO_API ABaseActor : public AActor, public IItemLogicInterface
     GENERATED_BODY()
 
 public:
+    ABaseActor();
+
     void BeginPlay();
 
     public:
@@ -26,7 +29,7 @@ public:
     virtual void        SetItemLogic_Implementation(UItemLogic* NewItemLogic) override;
 
 protected:
-    UPROPERTY()
+    UPROPERTY(VisibleInstanceOnly, Category = "ItemLogic")
     UItemLogic* ItemLogic;
 
     // Active
@@ -40,4 +43,8 @@ private:
 public:
     UFUNCTION(BlueprintCallable, Category = "Active")
     void AutomaticActivation();
+
+protected:
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Collision")
+    USphereComponent* PickUpSphere;
 };

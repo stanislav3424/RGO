@@ -9,6 +9,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameInstance_Main.h"
 #include "AIController.h"
+#include "AbilityLogic.h"
 
 void UCharacterLogic::Initialize()
 {
@@ -229,6 +230,42 @@ bool UCharacterLogic::TakeOffItem(UWeaponLogic* WeaponLogic)
 UWeaponLogic* UCharacterLogic::GetItemInSlot(EEquipmentSlot Slot) const
 {
     return Equipment.FindRef(Slot);
+}
+
+bool UCharacterLogic::GiveItemActor(AActor* Actor)
+{
+    if (!IsValid(Actor))
+        return false;
+
+    if (Actor->Implements<UItemLogicInterface>())
+        if (auto ItemLogic = IItemLogicInterface::Execute_GetItemLogic(Actor))
+        {
+            if (ItemLogic->IsA(UAbilityLogic::StaticClass()))
+            {
+                if (auto AbilityLogic = Cast<UAbilityLogic>(ItemLogic))
+                {
+                    AbilityLogic->ApplyAbility(this);
+                    return true;
+                }
+            }
+            else if (ItemLogic->IsA(UWeaponLogic::StaticClass()))
+            {
+                return EquipItem(ItemLogic);
+            }
+            else
+            {
+            }
+        }
+
+    return false;
+}
+
+bool UCharacterLogic::GiveItem(UItemLogic* ItemLogic)
+{
+    if (!ItemLogic)
+        return false;
+
+    return false;
 }
 
 void UCharacterLogic::HandleDeath()

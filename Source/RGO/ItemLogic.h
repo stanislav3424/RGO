@@ -110,6 +110,9 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Health")
     bool GetCanTakeDamage() const { return bCanTakeDamage; }
 
+    UFUNCTION(BlueprintCallable, Category = "Health")
+    void AddHealth(float Health);
+
 private:
     void BindToActorEvents();
     void UnbindFromActorEvents();

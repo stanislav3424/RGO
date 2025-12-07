@@ -12,6 +12,9 @@
 UCLASS()
 class RGO_API UFirstAidKitLogic : public UAbilityLogic
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
+
+public:
+    virtual bool ApplyAbility(UCharacterLogic* CharacterLogic);
+
 };

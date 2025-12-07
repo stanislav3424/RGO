@@ -3,3 +3,18 @@
 
 #include "AbilityLogic.h"
 
+bool UAbilityLogic::ApplyAbility(UCharacterLogic* CharacterLogic)
+{
+    if (!CharacterLogic)
+        return false;
+
+    
+
+    return false;
+}
+
+void UAbilityLogic::AbilityEnd()
+{
+    DestroyOwnerActor();
+    MarkAsGarbage();
+}

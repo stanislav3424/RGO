@@ -130,6 +130,11 @@ void UItemLogic::UpdateOwnerActor(AActor* Actor)
     BindToActorEvents();
 }
 
+void UItemLogic::AddHealth(float Health)
+{
+    ProcessDamage(-1.f * Health, nullptr);
+}
+
 void UItemLogic::BindToActorEvents()
 {
     CHECK_FIELD(OwnerActor);
@@ -162,7 +167,7 @@ void UItemLogic::HandleOwnerDamage(
 
 void UItemLogic::ProcessDamage(float DamageAmount, AActor* DamageCauser)
 {
-    CurrentHealth = FMath::Max(0.f, CurrentHealth - DamageAmount);
+    CurrentHealth = FMath::Clamp(CurrentHealth - DamageAmount, 0.f, MaxHealth);
 
     OnHealthChanged.Broadcast(CurrentHealth, MaxHealth);
 

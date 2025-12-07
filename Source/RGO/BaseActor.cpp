@@ -4,6 +4,23 @@
 #include "ItemLogic.h"
 #include "GameInstance_Main.h"
 #include "Macros.h"
+#include "Components/SphereComponent.h"
+
+ABaseActor::ABaseActor()
+{
+    RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+    SetRootComponent(RootComponent);
+
+    PickUpSphere = CreateDefaultSubobject<USphereComponent>(TEXT("PickupSphere"));
+    if (PickUpSphere)
+    {
+        PickUpSphere->SetupAttachment(GetRootComponent());
+        PickUpSphere->InitSphereRadius(50.f);
+        PickUpSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+        PickUpSphere->SetCollisionResponseToAllChannels(ECR_Overlap);
+        PickUpSphere->SetHiddenInGame(false);
+    }
+}
 
 void ABaseActor::BeginPlay()
 {

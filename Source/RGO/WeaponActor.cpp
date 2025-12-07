@@ -9,10 +9,10 @@ AWeaponActor::AWeaponActor()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+    
 
     SkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SkeletalMesh"));
-    SkeletalMeshComponent->SetupAttachment(RootComponent);
+    SkeletalMeshComponent->SetupAttachment(GetRootComponent());
 }
 
 void AWeaponActor::BeginPlay()

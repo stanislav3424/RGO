@@ -15,6 +15,7 @@
 #include "HUD_Main.h"
 #include "Macros.h"
 #include "GM_Main.h"
+#include "AutoPickUpSceneComponent.h"
 
 void APC_Main::BeginPlay()
 {
@@ -124,18 +125,14 @@ void APC_Main::RunTest()
         ControlledPawn->AutomaticActivation();
         if (auto GameInstance = GetGameInstance<UGameInstance_Main>())
         {
-            auto WeaponLogic = GameInstance->CreateItemLogic(TEXT("AK-47"));
 
             auto CharacterLogic = IItemLogicInterface::Execute_GetItemLogic(ControlledPawn);
             CharacterLogicRef   = Cast<UCharacterLogic>(CharacterLogic);
 
-            CHECK_FIELD(WeaponLogic);
             CHECK_FIELD(CharacterLogic);
-
 
             if (CharacterLogicRef)
             {
-                CharacterLogicRef->EquipItem(WeaponLogic);
                 if (auto World = GetWorld())
                 {
                     if (auto GameMode = World->GetAuthGameMode<AGM_Main>())

@@ -136,11 +136,17 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Equipment")
     bool EquipItem(UItemLogic* ItemLogic);
 
-    UFUNCTION(BlueprintCallable, Category = "Equipment")
+    //UFUNCTION(BlueprintCallable, Category = "Equipment")
     bool TakeOffItem(UWeaponLogic* WeaponLogic);
 
     UFUNCTION(BlueprintCallable, Category = "Equipment")
     UWeaponLogic* GetItemInSlot(EEquipmentSlot Slot) const;
+
+    UFUNCTION(BlueprintCallable, Category = "Equipment")
+    bool GiveItemActor(AActor* Actor);
+
+    UFUNCTION(BlueprintCallable, Category = "Equipment")
+    bool GiveItem(UItemLogic* ItemLogic);
 
     // Health
 protected:

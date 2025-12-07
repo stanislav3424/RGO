@@ -3,12 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "BaseActor.h"
 #include "WeaponActor.generated.h"
 
 
 UCLASS()
-class RGO_API AWeaponActor : public AActor
+class RGO_API AWeaponActor : public ABaseActor
 {
     GENERATED_BODY()
 

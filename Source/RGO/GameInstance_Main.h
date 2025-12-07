@@ -9,6 +9,7 @@ concept FTableRowDerived = std::is_base_of_v<FTableRowBase, T>;
 
 class UItemLogic;
 class AActor;
+class UNiagaraSystem;
 
 USTRUCT(BlueprintType)
 struct FBaseItemRow : public FTableRowBase
@@ -42,6 +43,11 @@ struct FWeaponItemRow : public FBaseItemRow
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 RateFire = 100;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float WeaponMOA = 2.f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    UNiagaraSystem* BulletEffect = nullptr;
 };
 
 USTRUCT(BlueprintType)

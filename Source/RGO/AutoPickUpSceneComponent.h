@@ -6,23 +6,37 @@
 #include "Components/SceneComponent.h"
 #include "AutoPickUpSceneComponent.generated.h"
 
+class UCharacterLogic;
+class USphereComponent;
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class RGO_API UAutoPickUpSceneComponent : public USceneComponent
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
-	UAutoPickUpSceneComponent();
+public:
+    UAutoPickUpSceneComponent();
 
 protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
+    virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+public:
+    virtual void TickComponent(
+        float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+    // Owner
+protected:
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Owner")
+    UCharacterLogic* CharacterLogicOwner;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Collision")
+    USphereComponent* PickUpSphere;
+
+    UFUNCTION()
+    void OnPickupBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+        int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+    UFUNCTION()
+    void OnPickupEndOverlap(
+        UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 };
