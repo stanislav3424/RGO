@@ -105,7 +105,6 @@ void UUW_HUD::SetHealth(float CurrentHealth, float MaxHealth)
         return;
     float HealthPercent = FMath::Clamp(CurrentHealth / MaxHealth, 0.0f, 1.0f);
     HealthProgressBar->SetPercent(HealthPercent);
-    UE_LOG(LogTemp, Error, TEXT("1"));
 
     if (!VignetteMID && BackgroundBorder)
     {
@@ -126,7 +125,7 @@ void UUW_HUD::SetHealth(float CurrentHealth, float MaxHealth)
             return;
         }
     }
-    UE_LOG(LogTemp, Error, TEXT("2"));
+
     float FillValue = 1.0f - HealthPercent;
     VignetteMID->SetScalarParameterValue(TEXT("FillPercent"), FillValue);
 

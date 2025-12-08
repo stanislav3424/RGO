@@ -31,7 +31,7 @@ public:
     virtual void        SetItemLogic_Implementation(UItemLogic* NewItemLogic) override;
 
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadOnly, Category = "CharacterLogic")
     UCharacterLogic* CharacterLogic;
 
 	// Active
