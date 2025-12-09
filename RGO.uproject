@@ -10,10 +10,14 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"UMGEditor",
 				"AIModule",
 				"UMG"
 			]
+		},
+		{
+			"Name": "UMGEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
