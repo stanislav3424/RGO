@@ -193,8 +193,7 @@ bool UWeaponLogic::PerformLineTrace(const FVector& StartLocation, const FVector&
         FColor TraceColor = bHit ? FColor::Red : FColor::Green;
         //DrawDebugLine(World, Start, bHit ? OutHit.Location : End, TraceColor, false, 1.0f);
 
-        if (bHit)
-            DrawDebugPoint(World, OutHit.Location, 10.0f, FColor::Red, false, 1.0f);
+        //if (bHit)            DrawDebugPoint(World, OutHit.Location, 10.0f, FColor::Red, false, 1.0f);
 
         return bHit;
     }

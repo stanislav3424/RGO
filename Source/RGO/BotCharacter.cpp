@@ -23,6 +23,11 @@ void ABotCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
+    
+}
+
+void ABotCharacter::CharacterLogicChanged()
+{
     if (auto Bar = Cast<UUW_BarBase>(WidgetComponent->GetUserWidgetObject()))
         Bar->InitWithCharacterLogic(CharacterLogic);
     if (CharacterLogic)
@@ -31,5 +36,6 @@ void ABotCharacter::BeginPlay()
 
 void ABotCharacter::OnDeath(UItemLogic* ItemLogic)
 {
+    if (WidgetComponent)
     WidgetComponent->SetWidget(nullptr);
 }

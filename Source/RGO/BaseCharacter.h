@@ -34,6 +34,8 @@ protected:
     UPROPERTY(BlueprintReadOnly, Category = "CharacterLogic")
     UCharacterLogic* CharacterLogic;
 
+    virtual void CharacterLogicChanged() {};
+
 	// Active
 protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Active", meta = (AllowPrivateAccess = "true"))

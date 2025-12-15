@@ -39,6 +39,8 @@ void ABaseCharacter::SetItemLogic_Implementation(UItemLogic* NewItemLogic)
     if (auto NewCharacterLogic = Cast<UCharacterLogic>(NewItemLogic))
         CharacterLogic = NewCharacterLogic;
     CHECK_FIELD(CharacterLogic);
+
+    CharacterLogicChanged();
 }
 
 void ABaseCharacter::AutomaticActivation()

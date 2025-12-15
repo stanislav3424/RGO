@@ -22,6 +22,8 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
     UWidgetComponent* WidgetComponent;
 
+    virtual void CharacterLogicChanged() override;
+
 public:
     UFUNCTION()
     void OnDeath(UItemLogic* ItemLogic);
